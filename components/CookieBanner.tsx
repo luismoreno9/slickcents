@@ -27,7 +27,7 @@ export default function CookieBanner() {
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold text-white mb-1">We use cookies</p>
           <p className="text-xs text-bark-300 leading-relaxed">
-            We use cookies to improve your experience, analyze traffic, and personalize content. By clicking "Accept", you agree to our{" "}
+            We use cookies to improve your experience, analyze traffic, and personalize content. By clicking &ldquo;Accept&rdquo;, you agree to our{" "}
             <a href="/privacy-policy" className="text-forest-400 hover:text-forest-300 underline underline-offset-2 transition-colors">
               Privacy Policy
             </a>
