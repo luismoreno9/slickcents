@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   description:
     "Budgeting, investing, side hustles, and building wealth — without the jargon or get-rich-quick nonsense. Personal finance advice from someone who's actually done it.",
   keywords: ["personal finance", "budgeting", "investing", "FIRE", "side hustles", "saving money"],
+  icons: {
+    icon: "/images/logo bueno.png",
+    apple: "/images/logo bueno.png",
+  },
   openGraph: {
     title: "SlickCents — Real Money Talk for Real People",
     description: "Personal finance advice that's honest, practical, and actually useful.",
