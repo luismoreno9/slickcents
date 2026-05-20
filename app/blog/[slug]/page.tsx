@@ -6,6 +6,26 @@ import CategoryBadge from "@/components/CategoryBadge";
 import AuthorBio from "@/components/AuthorBio";
 import RelatedArticles from "@/components/RelatedArticles";
 import Sidebar from "@/components/Sidebar";
+import ArticleAd from "@/components/ArticleAd";
+
+/**
+ * Ad insertion strategy:
+ *   - 2 ads per article maximum (NativeAd / Monetag vignette).
+ *   - First ad lands around 20% of paragraph count (post-intro, avoids hero-area).
+ *   - Second ad lands around 55% (mid-read, doesn't collide with related/CTA blocks).
+ *   - Positions are computed from total paragraphs so short and long articles both look balanced.
+ *   - Inline images already use indexes [5, 11] / [6]; we offset ad slots to avoid stacking.
+ *   - To disable all ads globally, flip `ADS_ENABLED` inside components/ArticleAd.tsx.
+ */
+function getAdInsertionPoints(totalParagraphs: number, imageInsertions: number[]): number[] {
+  if (totalParagraphs < 6) return []; // Don't pollute very short articles.
+  const first = Math.max(3, Math.round(totalParagraphs * 0.2));
+  const second = Math.max(first + 4, Math.round(totalParagraphs * 0.55));
+  // Nudge away from image positions so layouts don't pile up.
+  const avoid = new Set(imageInsertions);
+  const adjust = (p: number) => (avoid.has(p) ? p + 1 : avoid.has(p - 1) ? p + 1 : p);
+  return [adjust(first), adjust(second)];
+}
 
 export function generateStaticParams() {
   return allArticles.map((a) => ({ slug: a.slug }));
@@ -35,6 +55,14 @@ function renderBody(body: string, inlineImages: string[] = [], inlineAlts: strin
   let paragraphIndex = 0;
   const insertions = inlineImages.length === 2 ? [5, 11] : inlineImages.length === 1 ? [6] : [];
   let imagesInserted = 0;
+
+  // Pre-count narrative paragraphs to calculate ad positions.
+  const paragraphCount = paragraphs.filter((b) => {
+    const t = b.trim();
+    return t && !t.startsWith("## ") && !t.startsWith("### ") && !t.startsWith("---") && !t.startsWith("> ") && !t.startsWith("- ") && !t.startsWith("* ") && !/^\d+\./.test(t) && !t.startsWith("| ");
+  }).length;
+  const adPoints = getAdInsertionPoints(paragraphCount, insertions);
+  let adsInserted = 0;
 
   const flushList = () => {
     if (listItems.length) {
@@ -131,6 +159,11 @@ function renderBody(body: string, inlineImages: string[] = [], inlineAlts: strin
           </figure>
         );
         imagesInserted++;
+      }
+      // Insert native ad slot at calculated paragraph positions (max 2 per article).
+      if (adPoints.includes(paragraphIndex) && adsInserted < 2) {
+        elements.push(<ArticleAd key={`ad-${adsInserted}`} id={`article-ad-${adsInserted + 1}`} />);
+        adsInserted++;
       }
     }
   }
