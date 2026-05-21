@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -45,6 +46,13 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${dmSans.variable}`} translate="no">
       <head>
         <meta name="google" content="notranslate" />
+        {/* Google AdSense — site verification & ad serving */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4043278304639919"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body className="bg-cream-50 text-bark-900 antialiased font-body min-h-screen flex flex-col notranslate">
         <Header />
