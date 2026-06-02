@@ -98,7 +98,28 @@ function hashString(s: string): number {
   return Math.abs(h);
 }
 
+const INLINE_IMAGE_OVERRIDES: Record<string, string[]> = {
+  "side-hustle-taxes-1900-surprise": [
+    "/images/articles/taxes-inline-laptop.jpg",
+    "/images/articles/taxes-inline-paperwork.jpg",
+  ],
+  "credit-score-cost-me-9000-mortgage": [
+    "/images/articles/credit-inline-laptop.jpg",
+    "/images/articles/credit-inline-keys.jpg",
+  ],
+  "529-plan-what-i-got-wrong-first": [
+    "/images/articles/college-inline-graduation.jpg",
+    "/images/articles/college-inline-books.jpg",
+  ],
+  "kids-allowance-fixed-my-budget": [
+    "/images/articles/allowance-inline-piggybank.jpg",
+    "/images/articles/allowance-inline-coins.jpg",
+  ],
+};
+
 export function getInlineImages(slug: string, category: string, heroImage: string, count = 2): string[] {
+  const override = INLINE_IMAGE_OVERRIDES[slug];
+  if (override) return override.slice(0, count);
   const pool = (IMAGE_POOL[category] || []).filter((img) => img !== heroImage);
   if (pool.length === 0) return [];
   const seed = hashString(slug);
@@ -146,6 +167,10 @@ import article32 from "@/content/articles/dental-insurance-trap";
 import article33 from "@/content/articles/fire-number-isnt-what-you-think";
 import article34 from "@/content/articles/coast-lean-fat-fire-honest-take";
 import article35 from "@/content/articles/wish-id-known-about-fire";
+import article36 from "@/content/articles/side-hustle-taxes-1900-surprise";
+import article37 from "@/content/articles/credit-score-cost-me-9000-mortgage";
+import article38 from "@/content/articles/529-plan-what-i-got-wrong-first";
+import article39 from "@/content/articles/kids-allowance-fixed-my-budget";
 
 export const allArticles: Article[] = [
   article1,
@@ -183,6 +208,10 @@ export const allArticles: Article[] = [
   article33,
   article34,
   article35,
+  article36,
+  article37,
+  article38,
+  article39,
 ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 export function getArticleBySlug(slug: string): Article | undefined {
