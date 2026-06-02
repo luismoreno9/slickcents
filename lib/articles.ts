@@ -98,7 +98,28 @@ function hashString(s: string): number {
   return Math.abs(h);
 }
 
+const INLINE_IMAGE_OVERRIDES: Record<string, string[]> = {
+  "side-hustle-taxes-1900-surprise": [
+    "/images/articles/taxes-inline-laptop.jpg",
+    "/images/articles/taxes-inline-paperwork.jpg",
+  ],
+  "credit-score-cost-me-9000-mortgage": [
+    "/images/articles/credit-inline-laptop.jpg",
+    "/images/articles/credit-inline-keys.jpg",
+  ],
+  "529-plan-what-i-got-wrong-first": [
+    "/images/articles/college-inline-graduation.jpg",
+    "/images/articles/college-inline-books.jpg",
+  ],
+  "kids-allowance-fixed-my-budget": [
+    "/images/articles/allowance-inline-piggybank.jpg",
+    "/images/articles/allowance-inline-coins.jpg",
+  ],
+};
+
 export function getInlineImages(slug: string, category: string, heroImage: string, count = 2): string[] {
+  const override = INLINE_IMAGE_OVERRIDES[slug];
+  if (override) return override.slice(0, count);
   const pool = (IMAGE_POOL[category] || []).filter((img) => img !== heroImage);
   if (pool.length === 0) return [];
   const seed = hashString(slug);
