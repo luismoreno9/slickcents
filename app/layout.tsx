@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import { SITE_URL } from "@/lib/seo";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -18,6 +19,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "SlickCents — Real Money Talk for Real People",
     template: "%s | SlickCents",
@@ -32,7 +34,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SlickCents — Real Money Talk for Real People",
     description: "Personal finance advice that's honest, practical, and actually useful.",
+    url: SITE_URL,
+    siteName: "SlickCents",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SlickCents — Real Money Talk for Real People",
+    description: "Personal finance advice that's honest, practical, and actually useful.",
   },
 };
 

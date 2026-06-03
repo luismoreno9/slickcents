@@ -19,6 +19,9 @@ export async function generateMetadata({ params }: { params: { category: string 
   return {
     title: `${cat} Articles`,
     description: `Browse all ${cat.toLowerCase()} articles on SlickCents.`,
+    alternates: {
+      canonical: `/category/${categorySlug(cat)}`,
+    },
   };
 }
 

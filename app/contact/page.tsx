@@ -4,6 +4,7 @@ import ContactForm from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description: "Get in touch with Sarah Chen at SlickCents. Questions, collaborations, or just want to say hello.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

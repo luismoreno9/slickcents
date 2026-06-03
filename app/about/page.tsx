@@ -8,6 +8,7 @@ import { Target, Search, Heart } from "lucide-react";
 export const metadata: Metadata = {
   title: "About Sarah Chen",
   description: "The story behind SlickCents — a personal finance blog built on real-life experience, not theory.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
