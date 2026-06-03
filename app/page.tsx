@@ -1,8 +1,26 @@
+import type { Metadata } from "next";
 import { allArticles, getFeaturedArticle, CATEGORIES, categorySlug } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
 import Sidebar from "@/components/Sidebar";
 import NewsletterForm from "@/components/NewsletterForm";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL, SITE_NAME } from "@/lib/seo";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+  description:
+    "Personal finance advice that's honest, practical, and actually useful — budgeting, investing, side hustles, saving money, and FIRE.",
+};
 
 export default function HomePage() {
   const featured = getFeaturedArticle();
@@ -10,6 +28,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
+      <JsonLd data={websiteJsonLd} />
       {/* Hero / Intro Banner */}
       <section className="bg-gradient-to-br from-forest-600 via-forest-700 to-forest-800 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">

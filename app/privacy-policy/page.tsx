@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "SlickCents privacy policy — how we collect, use, and protect your information.",
+  alternates: { canonical: "/privacy-policy" },
 };
 
 const sections = [

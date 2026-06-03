@@ -6,6 +6,8 @@ import CategoryBadge from "@/components/CategoryBadge";
 import AuthorBio from "@/components/AuthorBio";
 import RelatedArticles from "@/components/RelatedArticles";
 import Sidebar from "@/components/Sidebar";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL, SITE_NAME, AUTHOR_NAME, absoluteUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
   return allArticles.map((a) => ({ slug: a.slug }));
@@ -14,15 +16,31 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const article = getArticleBySlug(params.slug);
   if (!article) return {};
+  const url = `${SITE_URL}/blog/${article.slug}`;
+  const imageUrl = absoluteUrl(article.image);
   return {
     title: article.title,
     description: article.excerpt,
+    alternates: {
+      canonical: `/blog/${article.slug}`,
+    },
     openGraph: {
       title: article.title,
       description: article.excerpt,
+      url,
+      siteName: SITE_NAME,
       type: "article",
       publishedTime: article.date,
-      images: [{ url: article.image }],
+      modifiedTime: article.date,
+      authors: [AUTHOR_NAME],
+      section: article.category,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: article.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      images: [imageUrl],
     },
   };
 }
@@ -155,8 +173,40 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   const inlineImages = getInlineImages(article.slug, article.category, article.image, 2);
   const inlineAlts = inlineImages.map(() => article.title);
 
+  const url = `${SITE_URL}/blog/${article.slug}`;
+  const imageUrl = absoluteUrl(article.image);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.excerpt,
+    image: [imageUrl],
+    datePublished: article.date,
+    dateModified: article.date,
+    author: {
+      "@type": "Person",
+      name: AUTHOR_NAME,
+      url: `${SITE_URL}/about`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    url,
+    articleSection: article.category,
+  };
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
           {/* Article */}
