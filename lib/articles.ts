@@ -171,6 +171,8 @@ import article36 from "@/content/articles/side-hustle-taxes-1900-surprise";
 import article37 from "@/content/articles/credit-score-cost-me-9000-mortgage";
 import article38 from "@/content/articles/529-plan-what-i-got-wrong-first";
 import article39 from "@/content/articles/kids-allowance-fixed-my-budget";
+import article40 from "@/content/articles/how-i-stopped-living-paycheck-to-paycheck";
+import article41 from "@/content/articles/started-saving-retirement-at-41";
 
 export const allArticles: Article[] = [
   article1,
@@ -212,6 +214,8 @@ export const allArticles: Article[] = [
   article37,
   article38,
   article39,
+  article40,
+  article41,
 ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 export function getArticleBySlug(slug: string): Article | undefined {
