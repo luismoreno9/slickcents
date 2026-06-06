@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   description:
     "Budgeting, investing, side hustles, and building wealth — without the jargon or get-rich-quick nonsense. Personal finance advice from someone who's actually done it.",
   keywords: ["personal finance", "budgeting", "investing", "FIRE", "side hustles", "saving money"],
+  verification: {
+    google: "IUAhPelPZ1cfhB4CjBiFQ7Jl0QUSsKRByh875",
+  },
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",
