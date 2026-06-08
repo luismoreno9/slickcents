@@ -3,11 +3,11 @@ import { Article } from "@/lib/articles";
 const article: Article = {
   slug: "started-saving-retirement-at-41",
   title: "I Started Saving for Retirement at 41. Here's What the Math Actually Shows",
-  date: "2025-06-03",
+  date: "2026-06-07",
   category: "Investing",
   excerpt:
     "I had $89,000 saved for retirement at 41 — well behind every benchmark. Instead of spiraling, I ran the forward-looking numbers. What I found was more useful than the guilt.",
-  image: "/images/articles/bank-laptop.jpg",
+  image: "/images/articles/retirement-planning.jpg",
   readTime: "9 min read",
   body: `
 In my late thirties, I had a habit of closing retirement calculator tabs before they finished loading.
