@@ -3,7 +3,7 @@ import { Article } from "@/lib/articles";
 const article: Article = {
   slug: "started-saving-retirement-at-41",
   title: "I Started Saving for Retirement at 41. Here's What the Math Actually Shows",
-  date: "2026-06-07",
+  date: "2026-06-04",
   category: "Investing",
   excerpt:
     "I had $89,000 saved for retirement at 41 — well behind every benchmark. Instead of spiraling, I ran the forward-looking numbers. What I found was more useful than the guilt.",

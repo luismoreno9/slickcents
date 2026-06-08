@@ -3,7 +3,7 @@ import { Article } from "@/lib/articles";
 const article: Article = {
   slug: "how-i-stopped-living-paycheck-to-paycheck",
   title: "The Month I Stopped Living Paycheck to Paycheck (It Wasn't a Raise That Fixed It)",
-  date: "2026-06-08",
+  date: "2026-06-06",
   category: "Budgeting",
   excerpt:
     "I made a decent salary and had nothing left three days before payday every month. This is the exact sequence of changes that broke the cycle — and why the thing that actually worked wasn't what I expected.",
